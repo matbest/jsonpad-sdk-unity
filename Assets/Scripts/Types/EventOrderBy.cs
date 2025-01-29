@@ -1,14 +1,19 @@
 using System.Runtime.Serialization;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
-namespace JSONPad.UnitySDK.Assets.Scripts.Types;
-
-[JsonConverter(typeof(JsonStringEnumMemberConverter))]
-public enum EventOrderBy
+namespace JSONPad.UnitySDK.Assets.Scripts.Types
 {
-    [EnumMember(Value = "createdAt")]
-    CreatedAt,
+    [JsonConverter(typeof(StringEnumConverter))] // Using Newtonsoft.Json
+    public enum EventOrderBy
+    {
+        [EnumMember(Value = "createdAt")]
+        CreatedAt,
 
-    [EnumMember(Value = "type")]
-    Type,
+        [EnumMember(Value = "type")]
+        EventType, // Renamed from "Type" to avoid conflicts
+
+        [EnumMember(Value = "unknown")]
+        Unknown // Handles unexpected values gracefully
+    }
 }

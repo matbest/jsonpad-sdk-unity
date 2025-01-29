@@ -1,32 +1,37 @@
 using System.Runtime.Serialization;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
-namespace JSONPad.UnitySDK.Assets.Scripts.Types;
-
-[JsonConverter(typeof(JsonStringEnumMemberConverter))]
-public enum IdentityEventType
+namespace JSONPad.UnitySDK.Assets.Scripts.Types
 {
-    [EnumMember(Value = "identity-created")]
-    Created,
+    [JsonConverter(typeof(StringEnumConverter))] // Updated for Newtonsoft.Json
+    public enum IdentityEventType
+    {
+        [EnumMember(Value = "identity-created")]
+        IdentityCreated,
 
-    [EnumMember(Value = "identity-updated")]
-    Updated,
+        [EnumMember(Value = "identity-updated")]
+        IdentityUpdated,
 
-    [EnumMember(Value = "identity-deleted")]
-    Deleted,
+        [EnumMember(Value = "identity-deleted")]
+        IdentityDeleted,
 
-    [EnumMember(Value = "identity-registered")]
-    Registered,
+        [EnumMember(Value = "identity-registered")]
+        IdentityRegistered,
 
-    [EnumMember(Value = "identity-logged-in")]
-    LoggedIn,
+        [EnumMember(Value = "identity-logged-in")]
+        IdentityLoggedIn,
 
-    [EnumMember(Value = "identity-logged-out")]
-    LoggedOut,
+        [EnumMember(Value = "identity-logged-out")]
+        IdentityLoggedOut,
 
-    [EnumMember(Value = "identity-updated-self")]
-    UpdatedSelf,
+        [EnumMember(Value = "identity-updated-self")]
+        IdentityUpdatedSelf,
 
-    [EnumMember(Value = "identity-deleted-self")]
-    DeletedSelf,
+        [EnumMember(Value = "identity-deleted-self")]
+        IdentityDeletedSelf,
+
+        [EnumMember(Value = "unknown")]
+        Unknown // Fallback for unexpected values
+    }
 }

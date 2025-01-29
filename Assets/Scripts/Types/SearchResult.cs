@@ -1,17 +1,19 @@
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
-namespace JSONPad.UnitySDK.Assets.Scripts.Types;
-
-public class SearchResult
+namespace JSONPad.UnitySDK.Assets.Scripts.Types
 {
-    [JsonPropertyName("relevance")]
-    public float Relevance { get; set; }
+    public class SearchResult
+    {
+        [JsonProperty("relevance")]
+        public float Relevance { get; set; }
 
-    [JsonPropertyName("id")]
-    public string? Id { get; set; } = string.Empty;
+        [JsonProperty("id")]
+        public string Id { get; set; } = string.Empty;
 
-    // [JsonPropertyName("item")]
-    // public Item[] Data { get; set; } = Array.Empty<T>();
+        // Uncomment and modify this when needed
+        // [JsonProperty("item")]
+        // public Item[] Data { get; set; } = Array.Empty<Item>();
 
-    // TODO
+        // TODO: Implement additional fields if required
+    }
 }

@@ -1,20 +1,25 @@
 using System.Runtime.Serialization;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
-namespace JSONPad.UnitySDK.Assets.Scripts.Types;
-
-[JsonConverter(typeof(JsonStringEnumMemberConverter))]
-public enum ItemEventType
+namespace JSONPad.UnitySDK.Assets.Scripts.Types
 {
-    [EnumMember(Value = "item-created")]
-    Created,
+    [JsonConverter(typeof(StringEnumConverter))] // Ensures proper JSON serialization
+    public enum ItemEventType
+    {
+        [EnumMember(Value = "item-created")]
+        Created,
 
-    [EnumMember(Value = "item-updated")]
-    Updated,
+        [EnumMember(Value = "item-updated")]
+        Updated,
 
-    [EnumMember(Value = "item-restored")]
-    Restored,
+        [EnumMember(Value = "item-restored")]
+        Restored,
 
-    [EnumMember(Value = "item-deleted")]
-    Deleted,
+        [EnumMember(Value = "item-deleted")]
+        Deleted,
+
+        [EnumMember(Value = "unknown")]
+        Unknown
+    }
 }

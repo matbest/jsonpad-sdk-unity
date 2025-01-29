@@ -1,17 +1,22 @@
 using System.Runtime.Serialization;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
-namespace JSONPad.UnitySDK.Assets.Scripts.Types;
-
-[JsonConverter(typeof(JsonStringEnumMemberConverter))]
-public enum EventStream
+namespace JSONPad.UnitySDK.Assets.Scripts.Types
 {
-    [EnumMember(Value = "list")]
-    List,
+    [JsonConverter(typeof(StringEnumConverter))] // Using Newtonsoft.Json
+    public enum EventStream
+    {
+        [EnumMember(Value = "list")]
+        ListStream, // Renamed from "List" to avoid conflicts
 
-    [EnumMember(Value = "item")]
-    Item,
+        [EnumMember(Value = "item")]
+        ItemStream, // Renamed from "Item" to avoid conflicts
 
-    [EnumMember(Value = "index")]
-    Index,
+        [EnumMember(Value = "index")]
+        IndexStream, // Renamed from "Index" to avoid conflicts
+
+        [EnumMember(Value = "unknown")]
+        Unknown // Handles unexpected values gracefully
+    }
 }

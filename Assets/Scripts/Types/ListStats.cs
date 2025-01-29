@@ -1,45 +1,48 @@
-using System.Text.Json.Serialization;
+using System;
+using System.Collections.Generic;
+using Newtonsoft.Json;
 
-namespace JSONPad.UnitySDK.Assets.Scripts.Types;
-
-public class ListStats
+namespace JSONPad.UnitySDK.Assets.Scripts.Types
 {
-    public sealed class ListContentsMetric : IMetric
+    public class ListStats
     {
-        [JsonPropertyName("date")]
-        public DateTime Date { get; set; }
+        public sealed class ListContentsMetric : IMetric
+        {
+            [JsonProperty("date")]
+            public DateTime Date { get; set; }
 
-        [JsonPropertyName("count")]
-        public int Count { get; set; }
+            [JsonProperty("count")]
+            public int Count { get; set; }
 
-        [JsonPropertyName("lists")]
-        public Dictionary<string, int> Lists { get; set; } = new();
+            [JsonProperty("lists")]
+            public Dictionary<string, int> Lists { get; set; } = new();
+        }
+
+        public sealed class ListEventsMetric : IMetric
+        {
+            [JsonProperty("date")]
+            public DateTime Date { get; set; }
+
+            [JsonProperty("count")]
+            public int Count { get; set; }
+
+            [JsonProperty("types")]
+            public Dictionary<ListEventType, int> Types { get; set; } = new();
+        }
+
+        [JsonProperty("maxItems")]
+        public int? MaxItems { get; set; }
+
+        [JsonProperty("maxIndexes")]
+        public int? MaxIndexes { get; set; }
+
+        [JsonProperty("items")]
+        public Stats<ListContentsMetric> Items { get; set; } = new();
+
+        [JsonProperty("indexes")]
+        public Stats<ListContentsMetric> Indexes { get; set; } = new();
+
+        [JsonProperty("events")]
+        public Stats<ListEventsMetric> Events { get; set; } = new();
     }
-
-    public sealed class ListEventsMetric : IMetric
-    {
-        [JsonPropertyName("date")]
-        public DateTime Date { get; set; }
-
-        [JsonPropertyName("count")]
-        public int Count { get; set; }
-
-        [JsonPropertyName("types")]
-        public Dictionary<ListEventType, int> Types { get; set; } = new();
-    }
-
-    [JsonPropertyName("maxItems")]
-    public int? MaxItems { get; set; }
-
-    [JsonPropertyName("maxIndexes")]
-    public int? MaxIndexes { get; set; }
-
-    [JsonPropertyName("items")]
-    public Stats<ListContentsMetric> Items { get; set; } = new();
-
-    [JsonPropertyName("indexes")]
-    public Stats<ListContentsMetric> Indexes { get; set; } = new();
-
-    [JsonPropertyName("events")]
-    public Stats<ListEventsMetric> Events { get; set; } = new();
 }

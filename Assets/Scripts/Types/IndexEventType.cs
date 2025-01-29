@@ -1,17 +1,22 @@
 using System.Runtime.Serialization;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
-namespace JSONPad.UnitySDK.Assets.Scripts.Types;
-
-[JsonConverter(typeof(JsonStringEnumMemberConverter))]
-public enum IndexEventType
+namespace JSONPad.UnitySDK.Assets.Scripts.Types
 {
-    [EnumMember(Value = "index-created")]
-    Created,
+    [JsonConverter(typeof(StringEnumConverter))]
+    public enum IndexEventType
+    {
+        [EnumMember(Value = "index-created")]
+        Created,
 
-    [EnumMember(Value = "index-updated")]
-    Updated,
+        [EnumMember(Value = "index-updated")]
+        Updated,
 
-    [EnumMember(Value = "index-deleted")]
-    Deleted,
+        [EnumMember(Value = "index-deleted")]
+        Deleted,
+
+        [EnumMember(Value = "unknown")]
+        Unknown
+    }
 }

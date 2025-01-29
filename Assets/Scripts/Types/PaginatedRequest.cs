@@ -1,12 +1,18 @@
-namespace JSONPad.UnitySDK.Assets.Scripts.Types;
+using Newtonsoft.Json;
+using System;
 
-public struct PaginatedRequest<T> where T : Enum
+
+namespace JSONPad.UnitySDK.Assets.Scripts.Types
 {
-    public int? Page { get; set; }
+    public struct PaginatedRequest<T> where T : Enum
+    {
+        [JsonProperty("page")]
+        public int? Page { get; set; }
 
-    public int? Limit { get; set; }
+        [JsonProperty("limit")]
+        public int? Limit { get; set; }
 
-    public T? Order { get; set; }
-
-    public OrderDirection? Direction { get; set; }
+        [JsonProperty("order")]
+        public T? Order { get; set; }
+    }
 }

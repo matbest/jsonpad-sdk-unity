@@ -1,23 +1,28 @@
 using System.Runtime.Serialization;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
-namespace JSONPad.UnitySDK.Assets.Scripts.Types;
-
-[JsonConverter(typeof(JsonStringEnumMemberConverter))]
-public enum IdentityOrderBy
+namespace JSONPad.UnitySDK.Assets.Scripts.Types
 {
-    [EnumMember(Value = "createdAt")]
-    CreatedAt,
+    [JsonConverter(typeof(StringEnumConverter))] // Use Newtonsoft.Json
+    public enum IdentityOrderBy
+    {
+        [EnumMember(Value = "createdAt")]
+        CreatedAt,
 
-    [EnumMember(Value = "updatedAt")]
-    UpdatedAt,
+        [EnumMember(Value = "updatedAt")]
+        UpdatedAt,
 
-    [EnumMember(Value = "name")]
-    Name,
+        [EnumMember(Value = "name")]
+        Name,
 
-    [EnumMember(Value = "group")]
-    Group,
+        [EnumMember(Value = "group")]
+        Group,
 
-    [EnumMember(Value = "activated")]
-    Activated,
+        [EnumMember(Value = "activated")]
+        Activated,
+
+        [EnumMember(Value = "unknown")]
+        Unknown // Handles unexpected values gracefully
+    }
 }

@@ -1,8 +1,10 @@
-namespace JSONPad.UnitySDK.Assets.Scripts;
+using System;
 
-public interface IMetric
+namespace JSONPad.UnitySDK.Assets.Scripts
 {
-    public DateTime Date { get; set; }
-
-    public int Count { get; set; }
+    public interface IMetric
+    {
+        DateTime Date { get; set; }
+        int Count { get; set; }
+    }
 }

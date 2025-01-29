@@ -1,33 +1,42 @@
-using System.Text.Json.Serialization;
+using System;
+using Newtonsoft.Json;
 
-namespace JSONPad.UnitySDK.Assets.Scripts.Models;
-
-public class Item
+namespace JSONPad.UnitySDK.Assets.Scripts.Models
 {
-    [JsonPropertyName("id")]
-    public string Id { get; set; } = default!;
+    public class Item
+    {
+        [JsonProperty("id")]
+        public string Id { get; set; } = string.Empty;
 
-    [JsonPropertyName("createdAt")]
-    public DateTime CreatedAt { get; set; }
+        [JsonProperty("createdAt")]
+        public DateTime CreatedAt { get; set; }
 
-    [JsonPropertyName("updatedAt")]
-    public DateTime UpdatedAt { get; set; }
+        [JsonProperty("updatedAt")]
+        public DateTime UpdatedAt { get; set; }
 
-    [JsonPropertyName("data")]
-    public dynamic Data { get; set; } = default!;
+        [JsonProperty("data")]
+        public object Data { get; set; } = new object(); // Avoids IL2CPP issues
 
-    [JsonPropertyName("description")]
-    public string Description { get; set; } = default!;
+        [JsonProperty("description")]
+        public string Description { get; set; } = string.Empty;
 
-    [JsonPropertyName("version")]
-    public string Version { get; set; } = default!;
+        [JsonProperty("version")]
+        public string Version { get; set; } = string.Empty;
 
-    [JsonPropertyName("readonly")]
-    public bool Readonly { get; set; } = default!;
+        [JsonProperty("readonly")]
+        public bool Readonly { get; set; }
 
-    [JsonPropertyName("size")]
-    public int Size { get; set; } = default!;
+        [JsonProperty("size")]
+        public int Size { get; set; }
 
-    [JsonPropertyName("activated")]
-    public bool Activated { get; set; }
+        [JsonProperty("activated")]
+        public bool Activated { get; set; }
+
+        // Constructor to ensure safe defaults
+        public Item()
+        {
+            CreatedAt = DateTime.UtcNow;
+            UpdatedAt = DateTime.UtcNow;
+        }
+    }
 }

@@ -1,37 +1,46 @@
-using System.Text.Json.Serialization;
+using System;
+using Newtonsoft.Json;
 using JSONPad.UnitySDK.Assets.Scripts.Types;
 
-namespace JSONPad.UnitySDK.Assets.Scripts.Models;
-
-public class Event<T> where T : Enum
+namespace JSONPad.UnitySDK.Assets.Scripts.Models
 {
-    [JsonPropertyName("id")]
-    public string Id { get; set; } = default!;
+    public class Event<T> where T : Enum
+    {
+        [JsonProperty("id")]
+        public string Id { get; set; } = string.Empty;
 
-    [JsonPropertyName("createdAt")]
-    public DateTime CreatedAt { get; set; }
+        [JsonProperty("createdAt")]
+        public DateTime CreatedAt { get; set; }
 
-    [JsonPropertyName("updatedAt")]
-    public DateTime UpdatedAt { get; set; }
+        [JsonProperty("updatedAt")]
+        public DateTime UpdatedAt { get; set; }
 
-    [JsonPropertyName("user")]
-    public User User { get; set; } = default!;
+        [JsonProperty("user")]
+        public User User { get; set; } = new User(); // Assuming User has a parameterless constructor
 
-    [JsonPropertyName("modelId")]
-    public string ModelId { get; set; } = default!;
+        [JsonProperty("modelId")]
+        public string ModelId { get; set; } = string.Empty;
 
-    [JsonPropertyName("eventStream")]
-    public EventStream EventStream { get; set; } = default!;
+        [JsonProperty("eventStream")]
+        public EventStream EventStream { get; set; } // Removed `new EventStream()` since `EventStream` is an enum
 
-    [JsonPropertyName("type")]
-    public T Type { get; set; } = default!;
+        [JsonProperty("type")]
+        public T Type { get; set; }
 
-    [JsonPropertyName("version")]
-    public string Version { get; set; } = default!;
+        [JsonProperty("version")]
+        public string Version { get; set; } = string.Empty;
 
-    [JsonPropertyName("snapshot")]
-    public dynamic Snapshot { get; set; } = default!;
+        [JsonProperty("snapshot")]
+        public object Snapshot { get; set; } = new object();
 
-    [JsonPropertyName("attachments")]
-    public dynamic Attachments { get; set; } = default!;
+        [JsonProperty("attachments")]
+        public object Attachments { get; set; } = new object();
+        
+        // Constructor to ensure proper initialization
+        public Event()
+        {
+            CreatedAt = DateTime.UtcNow;
+            UpdatedAt = DateTime.UtcNow;
+        }
+    }
 }

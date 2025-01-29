@@ -1,10 +1,18 @@
-namespace JSONPad.UnitySDK.Assets.Scripts.Types;
+using System;
 
-public struct IdentityParameter
+namespace JSONPad.UnitySDK.Assets.Scripts.Types
 {
-    public bool? Ignore { get; set; }
+    public struct IdentityParameter
+    {
+        public bool? Ignore { get; set; }
+        public string Group { get; set; }
+        public string Token { get; set; }
 
-    public string? Group { get; set; }
-
-    public string? Token { get; set; }
+        public IdentityParameter(bool? ignore, string group, string token)
+        {
+            Ignore = ignore;
+            Group = group ?? string.Empty;
+            Token = token ?? string.Empty;
+        }
+    }
 }

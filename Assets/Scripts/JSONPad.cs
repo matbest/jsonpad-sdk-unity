@@ -1,9 +1,12 @@
-namespace JSONPad.UnitySDK.Assets.Scripts;
+using UnityEngine;  // Required for Debug.Log
 
-public class JSONPad
+namespace JSONPad.UnitySDK.Assets.Scripts
 {
-    public JSONPad(string apiKey)
+    public class JSONPad
     {
-        Console.WriteLine($"Hello, World! {apiKey}");
+        public JSONPad(string apiKey)
+        {
+            Debug.Log($"Hello, World! {apiKey}");
+        }
     }
 }

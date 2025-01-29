@@ -1,57 +1,66 @@
-using System.Text.Json.Serialization;
+using System;
+using Newtonsoft.Json;
 
-namespace JSONPad.UnitySDK.Assets.Scripts.Models;
-
-public class List
+namespace JSONPad.UnitySDK.Assets.Scripts.Models
 {
-    [JsonPropertyName("id")]
-    public string Id { get; set; } = default!;
+    public class DataList // Renamed from "List" to avoid conflicts
+    {
+        [JsonProperty("id")]
+        public string Id { get; set; } = string.Empty;
 
-    [JsonPropertyName("createdAt")]
-    public DateTime CreatedAt { get; set; }
+        [JsonProperty("createdAt")]
+        public DateTime CreatedAt { get; set; }
 
-    [JsonPropertyName("updatedAt")]
-    public DateTime UpdatedAt { get; set; }
+        [JsonProperty("updatedAt")]
+        public DateTime UpdatedAt { get; set; }
 
-    [JsonPropertyName("user")]
-    public User User { get; set; } = default!;
+        [JsonProperty("user")]
+        public User User { get; set; } = new User(); // Assuming User has a parameterless constructor
 
-    [JsonPropertyName("name")]
-    public string Name { get; set; } = default!;
+        [JsonProperty("name")]
+        public string Name { get; set; } = string.Empty;
 
-    [JsonPropertyName("description")]
-    public string Description { get; set; } = default!;
+        [JsonProperty("description")]
+        public string Description { get; set; } = string.Empty;
 
-    [JsonPropertyName("pathName")]
-    public string PathName { get; set; } = default!;
+        [JsonProperty("pathName")]
+        public string PathName { get; set; } = string.Empty;
 
-    [JsonPropertyName("schema")]
-    public dynamic Schema { get; set; } = default!;
+        [JsonProperty("schema")]
+        public object Schema { get; set; } = new object(); // Avoids IL2CPP issues
 
-    [JsonPropertyName("pinned")]
-    public bool Pinned { get; set; } = default!;
+        [JsonProperty("pinned")]
+        public bool Pinned { get; set; }
 
-    [JsonPropertyName("readonly")]
-    public bool Readonly { get; set; } = default!;
+        [JsonProperty("readonly")]
+        public bool Readonly { get; set; }
 
-    [JsonPropertyName("realtime")]
-    public bool Realtime { get; set; } = default!;
+        [JsonProperty("realtime")]
+        public bool Realtime { get; set; }
 
-    [JsonPropertyName("protected")]
-    public bool Protected { get; set; } = default!;
+        [JsonProperty("protected")]
+        public bool Protected { get; set; }
 
-    [JsonPropertyName("indexable")]
-    public bool Indexable { get; set; } = default!;
+        [JsonProperty("indexable")]
+        public bool Indexable { get; set; }
 
-    [JsonPropertyName("generative")]
-    public bool Generative { get; set; } = default!;
+        [JsonProperty("generative")]
+        public bool Generative { get; set; }
 
-    [JsonPropertyName("generativePrompt")]
-    public string GenerativePrompt { get; set; } = default!;
+        [JsonProperty("generativePrompt")]
+        public string GenerativePrompt { get; set; } = string.Empty;
 
-    [JsonPropertyName("itemCount")]
-    public int ItemCount { get; set; } = default!;
+        [JsonProperty("itemCount")]
+        public int ItemCount { get; set; }
 
-    [JsonPropertyName("activated")]
-    public bool Activated { get; set; }
+        [JsonProperty("activated")]
+        public bool Activated { get; set; }
+
+        // Constructor to ensure safe defaults
+        public DataList()
+        {
+            CreatedAt = DateTime.UtcNow;
+            UpdatedAt = DateTime.UtcNow;
+        }
+    }
 }

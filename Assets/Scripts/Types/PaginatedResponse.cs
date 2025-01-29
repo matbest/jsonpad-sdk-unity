@@ -1,18 +1,20 @@
-using System.Text.Json.Serialization;
+using System;
+using Newtonsoft.Json;
 
-namespace JSONPad.UnitySDK.Assets.Scripts.Types;
-
-public class PaginatedResponse<T>
+namespace JSONPad.UnitySDK.Assets.Scripts.Types
 {
-    [JsonPropertyName("page")]
-    public int? Page { get; set; } = 1;
+    public class PaginatedResponse<T>
+    {
+        [JsonProperty("page")]
+        public int? Page { get; set; } = 1;
 
-    [JsonPropertyName("limit")]
-    public int? Limit { get; set; } = 10;
+        [JsonProperty("limit")]
+        public int? Limit { get; set; } = 10;
 
-    [JsonPropertyName("total")]
-    public int? Total { get; set; } = 0;
+        [JsonProperty("total")]
+        public int? Total { get; set; } = 0;
 
-    [JsonPropertyName("data")]
-    public T[] Data { get; set; } = Array.Empty<T>();
+        [JsonProperty("data")]
+        public T[] Data { get; set; } = Array.Empty<T>();
+    }
 }

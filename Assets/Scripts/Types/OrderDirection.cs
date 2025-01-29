@@ -1,14 +1,16 @@
 using System.Runtime.Serialization;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
-namespace JSONPad.UnitySDK.Assets.Scripts.Types;
-
-[JsonConverter(typeof(JsonStringEnumMemberConverter))]
-public enum OrderDirection
+namespace JSONPad.UnitySDK.Assets.Scripts.Types
 {
-    [EnumMember(Value = "asc")]
-    Ascending,
+    [JsonConverter(typeof(StringEnumConverter))]
+    public enum OrderDirection
+    {
+        [EnumMember(Value = "asc")]
+        Ascending,
 
-    [EnumMember(Value = "desc")]
-    Descending,
+        [EnumMember(Value = "desc")]
+        Descending
+    }
 }

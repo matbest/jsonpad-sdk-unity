@@ -1,21 +1,24 @@
-using System.Text.Json.Serialization;
+using System;
+using System.Collections.Generic;
+using Newtonsoft.Json;
 
-namespace JSONPad.UnitySDK.Assets.Scripts.Types;
-
-public class ItemStats
+namespace JSONPad.UnitySDK.Assets.Scripts.Types
 {
-    public sealed class ItemMetric : IMetric
+    public class ItemStats
     {
-        [JsonPropertyName("date")]
-        public DateTime Date { get; set; }
+        public sealed class ItemMetric : IMetric
+        {
+            [JsonProperty("date")]
+            public DateTime Date { get; set; }
 
-        [JsonPropertyName("count")]
-        public int Count { get; set; }
+            [JsonProperty("count")]
+            public int Count { get; set; }
 
-        [JsonPropertyName("types")]
-        public Dictionary<ItemEventType, int> Types { get; set; } = new();
+            [JsonProperty("types")]
+            public Dictionary<ItemEventType, int> Types { get; set; } = new();
+        }
+
+        [JsonProperty("events")]
+        public Stats<ItemMetric> Events { get; set; } = new();
     }
-
-    [JsonPropertyName("events")]
-    public Stats<ItemMetric> Events { get; set; } = new();
 }

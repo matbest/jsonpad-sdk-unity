@@ -1,30 +1,39 @@
-using System.Text.Json.Serialization;
+using System;
+using Newtonsoft.Json;
 
-namespace JSONPad.UnitySDK.Assets.Scripts.Models;
-
-public class Identity
+namespace JSONPad.UnitySDK.Assets.Scripts.Models
 {
-    [JsonPropertyName("id")]
-    public string Id { get; set; } = default!;
+    public class Identity
+    {
+        [JsonProperty("id")]
+        public string Id { get; set; } = string.Empty;
 
-    [JsonPropertyName("createdAt")]
-    public DateTime CreatedAt { get; set; }
+        [JsonProperty("createdAt")]
+        public DateTime CreatedAt { get; set; }
 
-    [JsonPropertyName("updatedAt")]
-    public DateTime UpdatedAt { get; set; }
+        [JsonProperty("updatedAt")]
+        public DateTime UpdatedAt { get; set; }
 
-    [JsonPropertyName("user")]
-    public User User { get; set; } = default!;
+        [JsonProperty("user")]
+        public User User { get; set; } = new User(); // Assuming User has a parameterless constructor
 
-    [JsonPropertyName("name")]
-    public string Name { get; set; } = default!;
+        [JsonProperty("name")]
+        public string Name { get; set; } = string.Empty;
 
-    [JsonPropertyName("group")]
-    public string Group { get; set; } = default!;
+        [JsonProperty("group")]
+        public string Group { get; set; } = string.Empty;
 
-    [JsonPropertyName("lastLoginAt")]
-    public DateTime? LastLoginAt { get; set; }
+        [JsonProperty("lastLoginAt")]
+        public DateTime? LastLoginAt { get; set; } = null;
 
-    [JsonPropertyName("activated")]
-    public bool Activated { get; set; }
+        [JsonProperty("activated")]
+        public bool Activated { get; set; }
+
+        // Constructor to set default values
+        public Identity()
+        {
+            CreatedAt = DateTime.UtcNow;
+            UpdatedAt = DateTime.UtcNow;
+        }
+    }
 }

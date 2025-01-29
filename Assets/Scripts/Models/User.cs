@@ -1,27 +1,36 @@
-using System.Text.Json.Serialization;
+using System;
+using Newtonsoft.Json;
 
-namespace JSONPad.UnitySDK.Assets.Scripts.Models;
-
-public class User
+namespace JSONPad.UnitySDK.Assets.Scripts.Models
 {
-    [JsonPropertyName("id")]
-    public string Id { get; set; } = default!;
+    public class User
+    {
+        [JsonProperty("id")]
+        public string Id { get; set; } = string.Empty;
 
-    [JsonPropertyName("createdAt")]
-    public DateTime CreatedAt { get; set; }
+        [JsonProperty("createdAt")]
+        public DateTime CreatedAt { get; set; }
 
-    [JsonPropertyName("updatedAt")]
-    public DateTime UpdatedAt { get; set; }
+        [JsonProperty("updatedAt")]
+        public DateTime UpdatedAt { get; set; }
 
-    [JsonPropertyName("displayName")]
-    public string DisplayName { get; set; } = default!;
+        [JsonProperty("displayName")]
+        public string DisplayName { get; set; } = string.Empty;
 
-    [JsonPropertyName("description")]
-    public string Description { get; set; } = default!;
+        [JsonProperty("description")]
+        public string Description { get; set; } = string.Empty;
 
-    [JsonPropertyName("lastActiveAt")]
-    public DateTime? LastActiveAt { get; set; }
+        [JsonProperty("lastActiveAt")]
+        public DateTime? LastActiveAt { get; set; } = null;
 
-    [JsonPropertyName("activated")]
-    public bool Activated { get; set; }
+        [JsonProperty("activated")]
+        public bool Activated { get; set; }
+
+        // Constructor to ensure safe defaults
+        public User()
+        {
+            CreatedAt = DateTime.UtcNow;
+            UpdatedAt = DateTime.UtcNow;
+        }
+    }
 }

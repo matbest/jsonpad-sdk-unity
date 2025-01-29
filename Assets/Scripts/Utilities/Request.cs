@@ -1,17 +1,19 @@
-namespace JSONPad.UnitySDK.Assets.Scripts.Utilities;
+using System;
+using System.Net.Http;
+using System.Threading.Tasks;
+using Newtonsoft.Json; // Use Newtonsoft.Json instead of System.Text.Json
 
-public class Request
+namespace JSONPad.UnitySDK.Assets.Scripts.Utilities
 {
-    public static async Task<T> Get<T>(string url)
+    public class Request
     {
-        // using var client = new HttpClient();
-        // var response = await client.GetAsync(url);
-        // response.EnsureSuccessStatusCode();
-        // var json = await response.Content.ReadAsStringAsync();
-        // return JsonSerializer.Deserialize<T>(json);
-
-        // TODO
-
-        throw new NotImplementedException();
+        public static async Task<T> Get<T>(string url)
+        {
+            using var client = new HttpClient();
+            var response = await client.GetAsync(url);
+            response.EnsureSuccessStatusCode();
+            var json = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<T>(json) ?? throw new InvalidOperationException("Deserialization returned null.");
+        }
     }
 }

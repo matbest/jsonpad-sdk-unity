@@ -1,49 +1,58 @@
-using System.Text.Json.Serialization;
+using System;
+using Newtonsoft.Json;
 using JSONPad.UnitySDK.Assets.Scripts.Types;
 
-namespace JSONPad.UnitySDK.Assets.Scripts.Models;
-
-public class Index
+namespace JSONPad.UnitySDK.Assets.Scripts.Models
 {
-    [JsonPropertyName("id")]
-    public string Id { get; set; } = default!;
+    public class Index
+    {
+        [JsonProperty("id")]
+        public string Id { get; set; } = string.Empty;
 
-    [JsonPropertyName("createdAt")]
-    public DateTime CreatedAt { get; set; }
+        [JsonProperty("createdAt")]
+        public DateTime CreatedAt { get; set; }
 
-    [JsonPropertyName("updatedAt")]
-    public DateTime UpdatedAt { get; set; }
+        [JsonProperty("updatedAt")]
+        public DateTime UpdatedAt { get; set; }
 
-    [JsonPropertyName("name")]
-    public string Name { get; set; } = default!;
+        [JsonProperty("name")]
+        public string Name { get; set; } = string.Empty;
 
-    [JsonPropertyName("description")]
-    public string Description { get; set; } = default!;
+        [JsonProperty("description")]
+        public string Description { get; set; } = string.Empty;
 
-    [JsonPropertyName("pathName")]
-    public string PathName { get; set; } = default!;
+        [JsonProperty("pathName")]
+        public string PathName { get; set; } = string.Empty;
 
-    [JsonPropertyName("pointer")]
-    public string Pointer { get; set; } = default!;
+        [JsonProperty("pointer")]
+        public string Pointer { get; set; } = string.Empty;
 
-    [JsonPropertyName("valueType")]
-    public IndexValueType ValueType { get; set; } = default!;
+        [JsonProperty("valueType")]
+        public IndexValueType ValueType { get; set; } = IndexValueType.Unknown; // Using "Unknown" instead of "Default"
 
-    [JsonPropertyName("alias")]
-    public bool Alias { get; set; } = default!;
+        [JsonProperty("alias")]
+        public bool Alias { get; set; }
 
-    [JsonPropertyName("sorting")]
-    public bool Sorting { get; set; } = default!;
+        [JsonProperty("sorting")]
+        public bool Sorting { get; set; }
 
-    [JsonPropertyName("filtering")]
-    public bool Filtering { get; set; } = default!;
+        [JsonProperty("filtering")]
+        public bool Filtering { get; set; }
 
-    [JsonPropertyName("searching")]
-    public bool Searching { get; set; } = default!;
+        [JsonProperty("searching")]
+        public bool Searching { get; set; }
 
-    [JsonPropertyName("defaultOrderDirection")]
-    public OrderDirection DefaultOrderDirection { get; set; } = default!;
+        [JsonProperty("defaultOrderDirection")]
+        public OrderDirection DefaultOrderDirection { get; set; } = OrderDirection.Ascending;
 
-    [JsonPropertyName("activated")]
-    public bool Activated { get; set; }
+        [JsonProperty("activated")]
+        public bool Activated { get; set; }
+
+        // Constructor to initialize default values
+        public Index()
+        {
+            CreatedAt = DateTime.UtcNow;
+            UpdatedAt = DateTime.UtcNow;
+        }
+    }
 }
