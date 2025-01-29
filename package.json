@@ -1,0 +1,14 @@
+{
+    "name": "io.jsonpad.jsonpad-sdk-unity",
+    "version": "1.0.0",
+    "displayName": "JSONPad SDK",
+    "description": "JSONPad SDK for Unity",
+    "unity": "2019.4",
+    "author": "Gordon Larrigan <gordonlarrigan@gmail.com> (https://gordonlarrigan.com)",
+    "license": "MIT",
+    "homepage": "https://github.com/basementuniverse/jsonpad-sdk-unity#readme",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/basementuniverse/jsonpad-sdk-unity.git"
+    }
+}
